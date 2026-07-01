@@ -1,0 +1,287 @@
+:root{
+  --text:#111;
+  --muted:#777;
+  --line:#eee;
+
+  --love-bg:#ffe4ef;   --love-bd:#ffb7d1;
+  --health-bg:#e9f7ff; --health-bd:#b8e4ff;
+  --career-bg:#efe9ff; --career-bd:#d3c4ff;
+  --you-bg:#eef2ff;    --you-bd:#c7d2fe;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
+  background:#fff;
+  color:var(--text);
+}
+
+/* Header like TikTok site */
+.top{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  padding:14px 16px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+
+.from{
+  font-size:12px;
+  letter-spacing:.15em;
+}
+
+.brand{ text-align:center; }
+.logo{
+  font-weight:800;
+  letter-spacing:.25em;
+  font-size:18px;
+}
+
+.nav{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  margin-top:6px;
+  flex-wrap:wrap;
+}
+.nav a{
+  text-decoration:none;
+  font-size:12px;
+  color:#666;
+}
+.nav a:hover{ color:#111; }
+
+.dot{
+  width:8px;
+  height:8px;
+  background:#111;
+  border-radius:50%;
+  justify-self:end;
+  opacity:.9;
+}
+
+/* Layout */
+main{
+  width:min(900px, 92vw);
+  margin:0 auto;
+}
+
+.section{ padding:48px 0; }
+
+h1,h2{
+  text-align:center;
+  font-weight:700;
+}
+h1{ font-size:26px; margin-bottom:10px; }
+h2{ font-size:22px; margin-bottom:10px; }
+
+.sub{
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  margin:12px auto 22px;
+  max-width:56ch;
+}
+
+/* Chips */
+.chips{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:14px 0 18px;
+}
+.chip{
+  border:1px solid #ddd;
+  background:#f3f4f6;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  cursor:pointer;
+  color:#111;
+}
+.chip.active{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+
+/* Letters cards (like screenshot grid) */
+.letters{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:14px;
+}
+.card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  background:#fff;
+  line-height:1.6;
+  font-size:14px;
+  min-height:140px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.tags{
+  margin-top:12px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.tag{
+  font-size:10px;
+  letter-spacing:.08em;
+  font-weight:800;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid #ddd;
+}
+.tag.love{ background:var(--love-bg); border-color:var(--love-bd); }
+.tag.health{ background:var(--health-bg); border-color:var(--health-bd); }
+.tag.career{ background:var(--career-bg); border-color:var(--career-bd); }
+.tag.you{ background:var(--you-bg); border-color:var(--you-bd); }
+
+/* Music centered */
+.musicWrap{
+  display:flex;
+  justify-content:center;
+}
+.musicWrap iframe{
+  max-width:420px;
+  border-radius:14px;
+  border:1px solid var(--line);
+}
+
+/* Wide video section (like “A video”) */
+.wideVideo{
+  width:min(820px, 100%);
+  margin:0 auto;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:#000;
+}
+.wideVideo video{
+  width:100%;
+  display:block;
+}
+
+/* Gallery: vertical-friendly */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:14px;
+}
+.media{
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:#fafafa;
+}
+.media img,
+.media video{
+  width:100%;
+  display:block;
+  aspect-ratio:9/16;
+  object-fit:cover;
+  background:#000;
+}
+
+/* Ask her out */
+.ask{
+  position:relative;
+  min-height:260px;
+  text-align:center;
+}
+.askButtons{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  margin-top:24px;
+  flex-wrap:wrap;
+}
+.askBtn{
+  border:none;
+  border-radius:999px;
+  padding:14px 28px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .15s ease;
+}
+.askBtn.yes{
+  background:#111;
+  color:#fff;
+}
+.askBtn.no{
+  background:#f3f4f6;
+  color:#111;
+  border:1px solid #ddd;
+}
+.askReply{
+  margin-top:24px;
+  font-size:18px;
+  font-weight:700;
+  color:var(--text);
+}
+
+/* Footer */
+.by{
+  border-top:1px solid var(--line);
+  padding-bottom:80px;
+}
+
+/* Responsive */
+@media (max-width: 820px){
+  .letters{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .gallery{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 520px){
+  h1{ font-size:22px; }
+  .letters{ grid-template-columns:1fr; }
+  .gallery{ grid-template-columns:1fr; }
+}
+
+/* Letter images section (TikTok style) */
+.letters-images{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  max-width:620px;
+  margin:0 auto;
+}
+
+/* Big handwritten-style letter */
+.big-letter{
+  max-width:620px;
+  margin:0 auto;
+  border:1px solid #eee;
+  border-radius:16px;
+  background:#fffdf7;
+  padding:36px 32px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:16px;
+  line-height:1.8;
+  color:#333;
+}
+
+.big-letter p{
+  text-align:left;
+  margin-bottom:16px;
+}
+
+.big-letter p:last-child{
+  margin-bottom:0;
+}
+
+.big-letter .signoff{
+  text-align:right;
+  font-style:italic;
+  font-size:18px;
+}
