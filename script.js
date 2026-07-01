@@ -66,7 +66,7 @@ const CONFIG = {
 
   if (yesBtn){
     yesBtn.addEventListener("click", () => {
-      askReply.textContent = `Yay! Coffee it is, ${CONFIG.toName}. I can't wait to talk. 💛`;
+      askReply.textContent = `Awesome! Let's make it happen. Pick a day, and let me know! ☕✨`;
       if (noBtn) noBtn.style.display = "none";
       yesBtn.style.transform = "scale(1.1)";
     });
