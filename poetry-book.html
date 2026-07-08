@@ -465,46 +465,7 @@
     right: auto;
   }
 
-  /* ---------- Nav ---------- */
-  .nav-btn{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    border-radius: 999px;
-    background: rgba(244,241,234,.05);
-    border: 1px solid rgba(244,241,234,.14);
-    color: #ece7dc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    backdrop-filter: blur(8px);
-    transition: background .3s ease, border-color .3s ease, transform .25s ease, opacity .25s ease;
-  }
-  .nav-btn:hover{ background: rgba(244,241,234,.12); border-color: rgba(184,154,107,.55); }
-  .nav-btn:active{ transform: translateY(-50%) scale(.94); }
-  .nav-btn[disabled]{ opacity: .2; pointer-events: none; }
-  .nav-prev{ left: -34px; }
-  .nav-next{ right: -34px; }
-  @media (min-width: 900px){
-    .nav-prev{ left: -58px; }
-    .nav-next{ right: -58px; }
-  }
-
-  .book.single-mode .nav-btn{
-    top: auto;
-    bottom: 12px;
-    transform: none;
-    width: 44px;
-    height: 44px;
-  }
-  .book.single-mode .nav-btn:active{ transform: scale(.94); }
-  .book.single-mode .nav-prev{ left: 8px; }
-  .book.single-mode .nav-next{ right: 8px; }
-  .book.single-mode .page{ padding-bottom: 74px; touch-action: manipulation; }
+  .page{ cursor: pointer; touch-action: manipulation; }
 
   .progress{
     margin-top: 1.6rem;
@@ -579,13 +540,6 @@
         <div class="flip-face flip-back face-right" id="flipBackwardBack"><div class="paper-noise"></div></div>
       </div>
     </div>
-
-    <button class="nav-btn nav-prev" id="prevBtn" aria-label="Өмнөх хуудас">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="nav-btn nav-next" id="nextBtn" aria-label="Дараагийн хуудас">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
   </div>
 
   <div class="progress" id="progress">1 / 12</div>
@@ -655,7 +609,7 @@
   /* 9 — poem 5 left */
   '<div class="page-content"><div class="poem">'
     + '<p>Эртний буурал уулс нь<br>Зүсрээнд шавшуулж мэлмэрнэ<br>Энгүүн хүний үр минь<br>Зэрвэс уулзсан ч бодогдоно...</p>'
-    + '<p>Зүйлийн буурал говь минь<br>Зэрэглээнд ноолуулж өндөлзөнө<br>Зүйргүй хүний үр минь<br>Зүүдэнд naaduulj тормолзоно...</p>'
+    + '<p>Зүйлийн буурал говь минь<br>Зэрэглээнд ноолуулж өндөлзөнө<br>Зүйргүй хүний үр минь<br>Зүүдэнд наадуулж тормолзоно...</p>'
     + '<p>Халхын сайхан нутаг нь<br>Хавраар ч намраар ч санагдана<br>Ховорхон хүний үрийг /ээ/<br>Хоногийн уртад үгүйлнэ</p>'
     + '</div></div>',
 
@@ -702,8 +656,6 @@
   var flipBackward = document.getElementById('flipBackward');
   var flipBackwardFront = document.getElementById('flipBackwardFront');
   var flipBackwardBack  = document.getElementById('flipBackwardBack');
-  var prevBtn = document.getElementById('prevBtn');
-  var nextBtn = document.getElementById('nextBtn');
   var progress = document.getElementById('progress');
   var bookStage = document.getElementById('bookStage');
   var intro = document.getElementById('intro');
@@ -724,8 +676,6 @@
   }
 
   function updateUI(){
-    prevBtn.disabled = idx <= 0;
-    nextBtn.disabled = idx >= spreads.length - 1;
     progress.textContent = single
       ? (idx + 1) + ' / 12'
       : SPREAD_LABELS[idx] + ' / 12';
@@ -803,9 +753,6 @@
       updateUI();
     });
   }
-
-  prevBtn.addEventListener('click', goPrev);
-  nextBtn.addEventListener('click', goNext);
 
   function handlePageTap(e){
     if (animating) return;
