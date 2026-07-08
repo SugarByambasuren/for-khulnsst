@@ -180,6 +180,9 @@
     z-index: 5;
     min-height: 100vh;
     min-height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -493,15 +496,15 @@
 
   .book.single-mode .nav-btn{
     top: auto;
-    bottom: 14px;
+    bottom: 12px;
     transform: none;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
   }
   .book.single-mode .nav-btn:active{ transform: scale(.94); }
-  .book.single-mode .nav-prev{ left: 10px; }
-  .book.single-mode .nav-next{ right: 10px; }
-  .book.single-mode .page{ padding-bottom: 68px; }
+  .book.single-mode .nav-prev{ left: 8px; }
+  .book.single-mode .nav-next{ right: 8px; }
+  .book.single-mode .page{ padding-bottom: 74px; touch-action: manipulation; }
 
   .progress{
     margin-top: 1.6rem;
@@ -515,8 +518,9 @@
   @media (max-width: 768px){
     .book{
       width: clamp(280px, 92vw, 420px);
-      height: clamp(480px, 72vh, 640px);
+      height: clamp(420px, 66vh, 600px);
     }
+    .book-stage{ padding: 4vw 3vw 2vw; }
   }
 </style>
 </head>
@@ -802,6 +806,22 @@
 
   prevBtn.addEventListener('click', goPrev);
   nextBtn.addEventListener('click', goNext);
+
+  function handlePageTap(e){
+    if (animating) return;
+    var rect = this.getBoundingClientRect();
+    var ratio = (e.clientX - rect.left) / rect.width;
+    if (single){
+      // whole page is visible at once — generous tap zones for fingers
+      if (ratio < 0.32) goPrev(); else goNext();
+    } else if (this === rightPage && ratio > 0.8){
+      goNext();
+    } else if (this === leftPage && ratio < 0.2){
+      goPrev();
+    }
+  }
+  leftPage.addEventListener('click', handlePageTap);
+  rightPage.addEventListener('click', handlePageTap);
 
   document.addEventListener('keydown', function(e){
     if (!bookStage.classList.contains('visible')) return;
